@@ -27,9 +27,8 @@ body {
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at top, rgba(79, 134, 255, 0.06), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(255, 124, 124, 0.05), transparent 35%),
-    var(--bg-page);
+  background: linear-gradient(rgba(7, 9, 15, 0.82), rgba(7, 9, 15, 0.82)),
+    url('/static/images/wallpaper.jpg') center/cover no-repeat;
   color: #e5e9f2;
 }
 
@@ -45,15 +44,34 @@ button {
 }
 
 .app-shell {
-  max-width: 1180px;
+  max-width: 1480px;
   margin: 0 auto;
-  padding: 32px 24px 48px;
+  padding: 28px 32px 40px;
+}
+
+.banner-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+  padding: 0 12px;
+}
+
+.banner-image {
+  width: auto;
+  max-width: 1000px;
+  max-height: 220px;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 10px 30px rgba(0, 0, 0, 0.24);
 }
 
 .hero-panel {
   display: grid;
-  gap: 24px;
-  padding: 26px 26px 30px;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 30px;
+  padding: 24px 28px 28px;
   border: 1px solid var(--panel-border);
   border-radius: 0;
   background: linear-gradient(180deg, rgba(15, 18, 28, 0.97), rgba(9, 12, 20, 0.95));
@@ -95,14 +113,14 @@ h1 {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #ffffff;
-  background: rgba(255, 124, 124, 0.16);
+  color: var(--danger);
+  background: rgba(255, 124, 124, 0.1);
   border: 1px solid rgba(255, 124, 124, 0.35);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), 0 8px 18px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), 0 8px 18px rgba(0, 0, 0, 0.08);
 }
 
 .score-panel .clear-btn:hover {
-  background: rgba(255, 124, 124, 0.24);
+  background: rgba(255, 124, 124, 0.18);
 }
 
 .score-card,
@@ -168,12 +186,18 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 24px;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 24px;
 }
 
+.section-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
 .section-eyebrow {
-  margin: 0;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -181,7 +205,7 @@ h1 {
 }
 
 .section-heading h2 {
-  margin: 8px 0 0;
+  margin: 0;
   font-size: 1.8rem;
   color: #ffffff;
 }
@@ -195,20 +219,20 @@ h1 {
 
 .modifier-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
 }
 
 .modifier-card {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 10px;
-  align-items: center;
-  padding: 14px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px;
   border-radius: 0;
   border: 1px solid rgba(255, 255, 255, 0.04);
   background: rgba(255, 255, 255, 0.03);
   transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  min-height: 125px;
 }
 
 .modifier-card:hover {
@@ -223,9 +247,17 @@ h1 {
   accent-color: var(--accent);
 }
 
+.modifier-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
 .modifier-content {
   display: grid;
-  gap: 4px;
+  gap: 6px;
 }
 
 .modifier-name {

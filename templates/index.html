@@ -8,8 +8,12 @@
   </head>
   <body>
     <main class="app-shell">
+      <div class="banner-wrapper">
+        <img class="banner-image" src="/static/images/banner.png" alt="Escape From Tarkov banner">
+      </div>
       <header class="hero-panel">
         <div>
+          <p class="eyebrow">Escape From Tarkov</p>
           <h1>Tarkov Modifier Calculator</h1>
         </div>
 
@@ -25,16 +29,18 @@
 
       <section class="section">
         <div class="section-heading">
-          <div>
-            <p class="section-eyebrow">Personal Positive</p>
-            <h2>Negative modifier values</h2>
-          </div>
-          <p class="section-note">These modifiers reduce the score and improve validity when active.</p>
+          <h2>Positive modifiers</h2>
+          <p class="section-note">These modifiers reduce the score and reduce validity when active.</p>
         </div>
 
         <div class="modifier-grid">
           {% for m in mods.positive %}
+            {% set icon_name = m.name | lower | replace("'", "") | replace(".", "") | replace(" ", "_") | replace("!", "") %}
+            {% if m.name == "The Tarkov Shooter" %}
+              {% set icon_name = "tarkov_shooter" %}
+            {% endif %}
             <label class="modifier-card">
+              <img class="modifier-icon" src="/static/images/{{ icon_name }}.png" alt="{{ m.name }} icon">
               <input class="mod" data-v="{{ m.value }}" type="checkbox">
               <div class="modifier-content">
                 <span class="modifier-name">{{ m.name }}</span>
@@ -48,16 +54,18 @@
 
       <section class="section alt">
         <div class="section-heading">
-          <div>
-            <p class="section-eyebrow">Personal Negative</p>
-            <h2>Positive modifier values</h2>
-          </div>
-          <p class="section-note">These modifiers increase the score and make the result invalid.</p>
+          <h2>Negative modifiers</h2>
+          <p class="section-note">These modifiers increase the score and make the result valid.</p>
         </div>
 
         <div class="modifier-grid">
           {% for m in mods.negative %}
+            {% set icon_name = m.name | lower | replace("'", "") | replace(".", "") | replace(" ", "_") | replace("!", "") %}
+            {% if m.name == "The Tarkov Shooter" %}
+              {% set icon_name = "tarkov_shooter" %}
+            {% endif %}
             <label class="modifier-card">
+              <img class="modifier-icon" src="/static/images/{{ icon_name }}.png" alt="{{ m.name }} icon">
               <input class="mod" data-v="{{ m.value }}" type="checkbox">
               <div class="modifier-content">
                 <span class="modifier-name">{{ m.name }}</span>
@@ -68,6 +76,7 @@
           {% endfor %}
         </div>
       </section>
+
     </main>
 
     <script src="/static/script.js"></script>
