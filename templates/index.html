@@ -12,9 +12,10 @@
         <img class="banner-image" src="/static/images/banner.png" alt="Escape From Tarkov banner">
       </div>
       <header class="hero-panel">
-        <div>
+        <div class="hero-copy">
           <p class="eyebrow">Escape From Tarkov</p>
           <h1>Tarkov Modifier Calculator</h1>
+          <p class="hero-tagline">Track modifier totals and verify whether your character build remains valid. Positive totals are valid; negative totals mean the character cannot be created.</p>
         </div>
 
         <div class="score-panel">
@@ -40,8 +41,10 @@
               {% set icon_name = "tarkov_shooter" %}
             {% endif %}
             <label class="modifier-card">
-              <img class="modifier-icon" src="/static/images/{{ icon_name }}.png" alt="{{ m.name }} icon">
-              <input class="mod" data-v="{{ m.value }}" type="checkbox">
+              <div class="modifier-card-badge">
+                <img class="modifier-icon" src="/static/images/{{ icon_name }}.png" alt="{{ m.name }} icon">
+                <input class="mod" data-v="{{ m.value }}" type="checkbox">
+              </div>
               <div class="modifier-content">
                 <span class="modifier-name">{{ m.name }}</span>
                 <span class="modifier-value">{{ m.value }}</span>
@@ -65,8 +68,10 @@
               {% set icon_name = "tarkov_shooter" %}
             {% endif %}
             <label class="modifier-card">
-              <img class="modifier-icon" src="/static/images/{{ icon_name }}.png" alt="{{ m.name }} icon">
-              <input class="mod" data-v="{{ m.value }}" type="checkbox">
+              <div class="modifier-card-badge">
+                <img class="modifier-icon" src="/static/images/{{ icon_name }}.png" alt="{{ m.name }} icon">
+                <input class="mod" data-v="{{ m.value }}" type="checkbox">
+              </div>
               <div class="modifier-content">
                 <span class="modifier-name">{{ m.name }}</span>
                 <span class="modifier-value">+{{ m.value }}</span>
