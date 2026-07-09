@@ -167,5 +167,9 @@ def home(request: Request):
         context={"mods": mods},
     )
 
+@app.get("/health")
+def health():
+    return {"status": "ok", "detail": "application is healthy"}
+
 # python -m uvicorn app:app --reload
 
