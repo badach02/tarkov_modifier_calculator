@@ -242,6 +242,42 @@ h1 {
   min-height: 125px;
 }
 
+.modifier-card.is-selected {
+  transform: translateY(-1px);
+}
+
+.modifier-card.is-negative.is-selected {
+  border-color: rgba(255, 124, 124, 0.5);
+  background: rgba(255, 124, 124, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 124, 124, 0.18);
+}
+
+.modifier-card.is-negative.is-selected .modifier-name,
+.modifier-card.is-negative.is-selected .modifier-value,
+.modifier-card.is-negative.is-selected .modifier-description {
+  color: #ffe4e4;
+}
+
+.modifier-card.is-negative.is-selected input {
+  accent-color: #ff7c7c;
+}
+
+.modifier-card.is-positive.is-selected {
+  border-color: rgba(74, 211, 122, 0.5);
+  background: rgba(74, 211, 122, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(74, 211, 122, 0.18);
+}
+
+.modifier-card.is-positive.is-selected .modifier-name,
+.modifier-card.is-positive.is-selected .modifier-value,
+.modifier-card.is-positive.is-selected .modifier-description {
+  color: #e8fff0;
+}
+
+.modifier-card.is-positive.is-selected input {
+  accent-color: #4ad37a;
+}
+
 .modifier-card-badge {
   display: flex;
   flex-direction: column;
