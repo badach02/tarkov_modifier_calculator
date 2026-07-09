@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tarkov Modifier Calculator</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero-panel">
+        <div>
+          <h1>Tarkov Modifier Calculator</h1>
+        </div>
+
+        <div class="score-panel">
+          <div class="score-card">
+            <span class="label">Score</span>
+            <strong id="score">0</strong>
+          </div>
+          <div id="status" class="status-pill valid">VALID</div>
+          <button type="button" class="clear-btn" onclick="clearModifiers()">Clear Selection</button>
+        </div>
+      </header>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="section-eyebrow">Personal Positive</p>
+            <h2>Negative modifier values</h2>
+          </div>
+          <p class="section-note">These modifiers reduce the score and improve validity when active.</p>
+        </div>
+
+        <div class="modifier-grid">
+          {% for m in mods.positive %}
+            <label class="modifier-card">
+              <input class="mod" data-v="{{ m.value }}" type="checkbox">
+              <div class="modifier-content">
+                <span class="modifier-name">{{ m.name }}</span>
+                <span class="modifier-value">{{ m.value }}</span>
+                <span class="modifier-description">{{ m.description }}</span>
+              </div>
+            </label>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="section-heading">
+          <div>
+            <p class="section-eyebrow">Personal Negative</p>
+            <h2>Positive modifier values</h2>
+          </div>
+          <p class="section-note">These modifiers increase the score and make the result invalid.</p>
+        </div>
+
+        <div class="modifier-grid">
+          {% for m in mods.negative %}
+            <label class="modifier-card">
+              <input class="mod" data-v="{{ m.value }}" type="checkbox">
+              <div class="modifier-content">
+                <span class="modifier-name">{{ m.name }}</span>
+                <span class="modifier-value">+{{ m.value }}</span>
+                <span class="modifier-description">{{ m.description }}</span>
+              </div>
+            </label>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
