@@ -9,7 +9,7 @@ function calc() {
   const statusEl = document.getElementById('status');
 
   scoreEl.textContent = total;
-  const valid = total > 0;
+  const valid = total >= 0;
 
   statusEl.textContent = valid ? 'VALID' : 'INVALID';
   statusEl.className = `status-pill ${valid ? 'valid' : 'invalid'}`;
