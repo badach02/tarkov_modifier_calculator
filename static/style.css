@@ -78,6 +78,29 @@ button {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 18px 60px rgba(0, 0, 0, 0.28);
 }
 
+.hero-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.hero-promo {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.promo-image {
+  display: block;
+  width: min(100%, 560px);
+  height: auto;
+  max-height: 170px;
+  object-fit: contain;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 10px 30px rgba(0, 0, 0, 0.24);
+}
+
 .eyebrow {
   margin: 0 0 12px;
   color: var(--text-muted);
@@ -459,6 +482,14 @@ h1 {
     gap: 22px;
   }
 
+  .hero-main {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-promo {
+    justify-content: center;
+  }
+
   .score-panel {
     justify-content: stretch;
   }
@@ -471,6 +502,10 @@ h1 {
 
   .hero-copy {
     margin: 0;
+  }
+
+  .promo-image {
+    max-height: 130px;
   }
 
   .score-panel > * {

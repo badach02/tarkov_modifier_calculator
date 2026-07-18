@@ -17,7 +17,7 @@ This project is a small web application for planning an Escape from Tarkov chara
 ## Application flow
 
 1. `app.py` creates the FastAPI app, mounts `/static`, and configures Jinja templates.
-2. The module-level `mods` dictionary contains two lists: `positive` and `negative`. Each item has `name`, `value`, `description`, and `icon` fields.
+2. `data/modifiers.json` is loaded and validated at startup into the `mods` dictionary. It contains two lists: `positive` and `negative`. Each item has `key`, `name`, `value`, `description`, and `icon` fields.
 3. `GET /` renders `index.html` and passes the modifier dictionary to the template.
 4. `GET /health` returns `{ "status": "ok", "detail": "application is healthy" }`.
 5. The template renders one checkbox card per modifier. Checkbox values are stored in `data-v` attributes; no form submission or backend calculation is used.
@@ -67,7 +67,8 @@ The Dockerfile starts Uvicorn on port `3000` but declares `EXPOSE 80`. The appli
 
 ## Likely maintenance points
 
-- Add or edit modifiers in `app.py` inside `mods`.
+- Add or edit modifiers in `data/modifiers.json`; do not rename existing stable keys because they are used by shared URLs.
+- Modifier validation requires unique non-empty keys, non-empty text/icon fields, integer values, negative values in `positive`, and positive values in `negative`.
 - Add matching icon files under `static/images/` when introducing modifiers.
 - Update scoring or validity rules in `static/script.js`.
 - Update page structure in `templates/index.html` and visual design in `static/style.css`.
