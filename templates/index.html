@@ -25,7 +25,8 @@
           </div>
           <div id="status" class="status-pill valid">VALID</div>
           <button type="button" class="clear-btn" onclick="clearModifiers()">Clear Selection</button>
-          <button type="button" id="copy-link-btn" class="copy-btn" onclick="copyShareLink()">Copy Share Link</button>
+          <button type="button" id="copy-link-btn" class="copy-btn" onclick="copyShareLink('copy-link-btn')">Copy Share Link</button>
+          <button type="button" class="summary-btn" onclick="exportSummary('summary-btn')">Export Summary</button>
         </div>
       </header>
 
@@ -84,6 +85,19 @@
       </section>
 
     </main>
+
+    <aside class="bottom-status-bar" aria-label="Current modifier build status">
+      <div class="bottom-score">
+        <span class="bottom-label">Score</span>
+        <strong id="bottom-score">0</strong>
+      </div>
+      <div id="bottom-status" class="status-pill valid">VALID</div>
+      <div class="bottom-actions">
+        <button type="button" class="clear-btn" onclick="clearModifiers()">Clear Selection</button>
+        <button type="button" id="bottom-copy-link-btn" class="copy-btn" onclick="copyShareLink('bottom-copy-link-btn')">Copy Share Link</button>
+        <button type="button" id="bottom-summary-btn" class="summary-btn" onclick="exportSummary('bottom-summary-btn')">Export Summary</button>
+      </div>
+    </aside>
 
     <script src="/static/script.js?v={{ static_version }}"></script>
   </body>

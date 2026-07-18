@@ -46,7 +46,7 @@ button {
 .app-shell {
   max-width: 1480px;
   margin: 0 auto;
-  padding: 28px 32px 40px;
+  padding: 28px 32px 150px;
 }
 
 .banner-wrapper {
@@ -68,7 +68,7 @@ button {
 
 .hero-panel {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   align-items: center;
   gap: 30px;
   padding: 24px 28px 28px;
@@ -108,10 +108,15 @@ h1 {
 
 .score-panel {
   display: flex;
+  grid-column: 1 / -1;
   flex-wrap: wrap;
   gap: 12px;
-  justify-content: center;
+  justify-content: stretch;
   align-items: center;
+}
+
+.score-panel > * {
+  flex: 1 1 0;
 }
 
 .score-panel .clear-btn {
@@ -145,6 +150,72 @@ h1 {
   background: rgba(79, 134, 255, 0.22);
 }
 
+.score-panel .summary-btn {
+  padding: 14px 20px;
+  min-width: 140px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #c8ffe0;
+  background: rgba(74, 211, 122, 0.12);
+  border: 1px solid rgba(74, 211, 122, 0.35);
+}
+
+.score-panel .summary-btn:hover {
+  background: rgba(74, 211, 122, 0.22);
+}
+
+.bottom-status-bar {
+  position: fixed;
+  z-index: 20;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 32px calc(12px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--panel-border);
+  background: rgba(9, 12, 20, 0.97);
+  box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(14px);
+}
+
+.bottom-score {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.bottom-label {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+#bottom-score {
+  color: #ffffff;
+  font-size: 1.8rem;
+}
+
+.bottom-status-bar .status-pill {
+  min-width: 120px;
+  padding: 10px 16px;
+}
+
+.bottom-actions {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.bottom-actions button {
+  padding: 11px 16px;
+}
+
 .score-card,
 .status-pill {
   padding: 14px 20px;
@@ -155,7 +226,7 @@ h1 {
 }
 
 .score-card {
-  min-width: 180px;
+  min-width: 150px;
 }
 
 .score-card .label {
@@ -395,11 +466,15 @@ h1 {
 
 @media (max-width: 760px) {
   .app-shell {
-    padding: 24px 16px 36px;
+    padding: 24px 16px 220px;
   }
 
   .hero-copy {
     margin: 0;
+  }
+
+  .score-panel > * {
+    flex-basis: calc(50% - 6px);
   }
 
   .section-heading {
@@ -420,5 +495,33 @@ h1 {
 
   .modifier-card input {
     margin-left: auto;
+  }
+
+  .bottom-status-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .bottom-score {
+    min-width: 0;
+  }
+
+  .bottom-status-bar .status-pill {
+    min-width: 0;
+    padding: 8px 12px;
+  }
+
+  .bottom-actions {
+    flex-basis: 100%;
+    justify-content: stretch;
+  }
+
+  .bottom-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
+    font-size: 0.7rem;
   }
 }

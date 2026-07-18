@@ -39,13 +39,17 @@ The UI also uses the numeric sign to color selected cards: negative values recei
 - `The Tarkov Shooter` has an explicit template override to map to `tarkov_shooter.png`.
 - The `icon` fields in `app.py` are currently not used by the template; the template reconstructs paths from names.
 - The page is responsive through CSS breakpoints at 960px and 760px.
+- The calculator hero is a single-column panel: title and description appear above a full-width row containing score, validity, and actions.
+- A fixed bottom status bar mirrors the score, validity, Clear Selection, Copy Share Link, and Export Summary controls while the user scrolls. Extra page-bottom padding prevents it from covering the final modifier cards.
 - There is no persistence, authentication, database, API endpoint for calculations, automated test suite, or build toolchain.
 - The page uses a compact shareable URL parameter: `?m=1-<hex-mask>`. The mask is built from sorted stable modifier keys, restored on page load, and updated with `history.replaceState` whenever selections change.
 - The Copy Share Link button copies the current URL and shows temporary success or failure feedback.
+- `GET /summary` renders a shareable build summary using the same `?m=1-<hex-mask>` parameter. The summary displays selected modifiers in separate Positive and Negative panels with icons, names, values, and descriptions.
+- The calculator's Export Summary button opens the summary URL in a new tab only when at least one modifier is selected and the score is valid (`>= 0`). Otherwise it displays temporary feedback without navigating. The summary provides Copy Link and Back to Calculator actions and shows an error state for missing or invalid selection data.
 
 ## Static asset cache versioning
 
-`app.py` defines `STATIC_VERSION`, which is added as a query string to the CSS and JavaScript asset URLs in `templates/index.html` (for example, `/static/script.js?v=2`). Increment this value whenever deployed CSS or JavaScript changes so browsers and CDNs request the new files instead of reusing stale cached assets. This is intentionally a manual release version; update it as part of each frontend asset deployment.
+`app.py` defines `STATIC_VERSION`, which is added as a query string to the CSS and JavaScript asset URLs in `templates/index.html` and `templates/summary.html` (currently `/static/script.js?v=6`). Increment this value whenever deployed CSS or JavaScript changes so browsers and CDNs request the new files instead of reusing stale cached assets. This is intentionally a manual release version; update it as part of each frontend asset deployment.
 
 ## Running locally
 
@@ -67,5 +71,6 @@ The Dockerfile starts Uvicorn on port `3000` but declares `EXPOSE 80`. The appli
 - Add matching icon files under `static/images/` when introducing modifiers.
 - Update scoring or validity rules in `static/script.js`.
 - Update page structure in `templates/index.html` and visual design in `static/style.css`.
+- Update summary page structure in `templates/summary.html` and summary behavior/layout in `static/summary.js` and `static/summary.css`.
 - Increment `STATIC_VERSION` in `app.py` when deploying changes to `static/script.js` or `static/style.css`.
 - If server-side validation, saved builds, or external data are added, introduce backend endpoints and tests; currently all selection state exists only in the browser.

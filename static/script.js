@@ -76,6 +76,13 @@ function calc() {
 
   statusEl.textContent = valid ? 'VALID' : 'INVALID';
   statusEl.className = `status-pill ${valid ? 'valid' : 'invalid'}`;
+  const bottomScoreEl = document.getElementById('bottom-score');
+  const bottomStatusEl = document.getElementById('bottom-status');
+  if (bottomScoreEl) bottomScoreEl.textContent = total;
+  if (bottomStatusEl) {
+    bottomStatusEl.textContent = valid ? 'VALID' : 'INVALID';
+    bottomStatusEl.className = `status-pill ${valid ? 'valid' : 'invalid'}`;
+  }
   syncModifierStates();
   updateShareUrl();
 }
@@ -87,8 +94,8 @@ function clearModifiers() {
   calc();
 }
 
-async function copyShareLink() {
-  const button = document.getElementById('copy-link-btn');
+async function copyShareLink(buttonId = 'copy-link-btn') {
+  const button = document.getElementById(buttonId);
   try {
     await navigator.clipboard.writeText(window.location.href);
     button.textContent = 'Link Copied';
@@ -97,6 +104,22 @@ async function copyShareLink() {
     button.textContent = 'Copy Failed';
     setTimeout(() => { button.textContent = 'Copy Share Link'; }, 1600);
   }
+}
+
+function exportSummary(buttonId = 'summary-btn') {
+  const button = document.getElementById(buttonId);
+  const selected = document.querySelector('.mod:checked');
+  const score = Number.parseInt(document.getElementById('score').textContent, 10);
+  if (!selected || score < 0) {
+    button.textContent = selected ? 'Build Invalid' : 'Select Modifiers';
+    setTimeout(() => { button.textContent = 'Export Summary'; }, 1600);
+    return;
+  }
+
+  const summaryUrl = new URL('/summary', window.location.origin);
+  const selection = new URL(window.location.href).searchParams.get(SHARE_PARAM);
+  if (selection) summaryUrl.searchParams.set(SHARE_PARAM, selection);
+  window.open(summaryUrl.toString(), '_blank', 'noopener,noreferrer');
 }
 
 restoreFromUrl();

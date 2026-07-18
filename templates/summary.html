@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modifier Build Summary</title>
+    <link rel="stylesheet" href="/static/style.css?v={{ static_version }}">
+    <link rel="stylesheet" href="/static/summary.css?v={{ static_version }}">
+  </head>
+  <body class="summary-page">
+    <main class="summary-shell">
+      <header class="summary-header">
+        <p class="eyebrow">Escape From Tarkov</p>
+        <h1>Modifier Build Summary</h1>
+        <div class="summary-score-row">
+          <span id="summary-score">0</span>
+          <span>(total)</span>
+        </div>
+        <p id="summary-error" class="summary-error" hidden>This summary link does not contain a valid modifier selection.</p>
+      </header>
+
+      <section id="summary-layout" class="summary-layout" aria-live="polite">
+        <section class="summary-panel positive-panel">
+          <div class="summary-panel-heading">
+            <strong id="positive-total">0</strong>
+            <span>Positive</span>
+          </div>
+          <div id="positive-modifiers" class="summary-modifiers"></div>
+        </section>
+
+        <section class="summary-panel negative-panel">
+          <div class="summary-panel-heading">
+            <strong id="negative-total">0</strong>
+            <span>Negative</span>
+          </div>
+          <div id="negative-modifiers" class="summary-modifiers"></div>
+        </section>
+      </section>
+
+      <nav class="summary-actions" aria-label="Summary actions">
+        <button type="button" class="copy-btn" onclick="copySummaryLink()">Copy Link</button>
+        <a class="back-btn" id="back-to-calculator" href="/">Back to Calculator</a>
+      </nav>
+    </main>
+
+    <script id="summary-data" type="application/json">{{ mods | tojson }}</script>
+    <script src="/static/summary.js?v={{ static_version }}"></script>
+  </body>
+</html>
