@@ -83,6 +83,8 @@ function calc() {
     bottomStatusEl.textContent = valid ? 'VALID' : 'INVALID';
     bottomStatusEl.className = `status-pill ${valid ? 'valid' : 'invalid'}`;
   }
+  const feedbackEl = document.getElementById('export-feedback');
+  if (feedbackEl && valid) feedbackEl.textContent = '';
   syncModifierStates();
   updateShareUrl();
 }
@@ -110,7 +112,12 @@ function exportSummary(buttonId = 'summary-btn') {
   const button = document.getElementById(buttonId);
   const selected = document.querySelector('.mod:checked');
   const score = Number.parseInt(document.getElementById('score').textContent, 10);
+  const feedbackEl = document.getElementById('export-feedback');
   if (!selected || score < 0) {
+    const message = selected
+      ? 'Export unavailable: your build must be valid.'
+      : 'Select at least one modifier before exporting.';
+    if (feedbackEl) feedbackEl.textContent = message;
     button.textContent = selected ? 'Build Invalid' : 'Select Modifiers';
     setTimeout(() => { button.textContent = 'Export Summary'; }, 1600);
     return;

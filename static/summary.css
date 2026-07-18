@@ -91,10 +91,13 @@
 }
 
 .summary-modifier-content {
+  flex: 1 1 auto;
+  width: 100%;
   min-width: 0;
 }
 
 .summary-modifier-title {
+  width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 64px;
   gap: 12px;
