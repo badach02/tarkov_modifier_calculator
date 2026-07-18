@@ -1,3 +1,51 @@
+const SHARE_PARAM = 'm';
+const SHARE_VERSION = '1';
+
+function modifierBoxes() {
+  return Array.from(document.querySelectorAll('.mod'));
+}
+
+function modifierOrder() {
+  return modifierBoxes().sort((a, b) => a.dataset.key.localeCompare(b.dataset.key));
+}
+
+function updateShareUrl() {
+  const ordered = modifierOrder();
+  let mask = 0n;
+
+  ordered.forEach((box, index) => {
+    if (box.checked) mask |= 1n << BigInt(index);
+  });
+
+  const url = new URL(window.location.href);
+  if (mask === 0n) {
+    url.searchParams.delete(SHARE_PARAM);
+  } else {
+    url.searchParams.set(SHARE_PARAM, `${SHARE_VERSION}-${mask.toString(16)}`);
+  }
+  window.history.replaceState(null, '', url);
+}
+
+function restoreFromUrl() {
+  const encoded = new URL(window.location.href).searchParams.get(SHARE_PARAM);
+  modifierBoxes().forEach((box) => { box.checked = false; });
+  if (!encoded) return;
+
+  const match = encoded.match(/^1-([0-9a-f]+)$/i);
+  if (!match) return;
+
+  try {
+    const mask = BigInt(`0x${match[1]}`);
+    const ordered = modifierOrder();
+    if (mask === 0n || (mask >> BigInt(ordered.length)) !== 0n) return;
+    ordered.forEach((box, index) => {
+      box.checked = (mask & (1n << BigInt(index))) !== 0n;
+    });
+  } catch {
+    modifierBoxes().forEach((box) => { box.checked = false; });
+  }
+}
+
 function syncModifierStates() {
   document.querySelectorAll('.modifier-card').forEach((card) => {
     const box = card.querySelector('.mod');
@@ -29,6 +77,7 @@ function calc() {
   statusEl.textContent = valid ? 'VALID' : 'INVALID';
   statusEl.className = `status-pill ${valid ? 'valid' : 'invalid'}`;
   syncModifierStates();
+  updateShareUrl();
 }
 
 function clearModifiers() {
@@ -38,6 +87,19 @@ function clearModifiers() {
   calc();
 }
 
+async function copyShareLink() {
+  const button = document.getElementById('copy-link-btn');
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    button.textContent = 'Link Copied';
+    setTimeout(() => { button.textContent = 'Copy Share Link'; }, 1600);
+  } catch {
+    button.textContent = 'Copy Failed';
+    setTimeout(() => { button.textContent = 'Copy Share Link'; }, 1600);
+  }
+}
+
+restoreFromUrl();
 document.querySelectorAll('.mod').forEach((box) => {
   box.addEventListener('change', calc);
 });

@@ -25,6 +25,7 @@
           </div>
           <div id="status" class="status-pill valid">VALID</div>
           <button type="button" class="clear-btn" onclick="clearModifiers()">Clear Selection</button>
+          <button type="button" id="copy-link-btn" class="copy-btn" onclick="copyShareLink()">Copy Share Link</button>
         </div>
       </header>
 
@@ -43,7 +44,7 @@
             <label class="modifier-card">
               <div class="modifier-card-badge">
                 <img class="modifier-icon" src="/static/images/{{ icon_name }}.png" alt="{{ m.name }} icon">
-                <input class="mod" data-v="{{ m.value }}" type="checkbox">
+                <input class="mod" data-key="{{ m.key }}" data-v="{{ m.value }}" type="checkbox">
               </div>
               <div class="modifier-content">
                 <span class="modifier-name">{{ m.name }}</span>
@@ -70,7 +71,7 @@
             <label class="modifier-card">
               <div class="modifier-card-badge">
                 <img class="modifier-icon" src="/static/images/{{ icon_name }}.png" alt="{{ m.name }} icon">
-                <input class="mod" data-v="{{ m.value }}" type="checkbox">
+                <input class="mod" data-key="{{ m.key }}" data-v="{{ m.value }}" type="checkbox">
               </div>
               <div class="modifier-content">
                 <span class="modifier-name">{{ m.name }}</span>

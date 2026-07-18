@@ -130,6 +130,21 @@ h1 {
   background: rgba(255, 124, 124, 0.18);
 }
 
+.score-panel .copy-btn {
+  padding: 14px 20px;
+  min-width: 140px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #b9d2ff;
+  background: rgba(79, 134, 255, 0.12);
+  border: 1px solid rgba(79, 134, 255, 0.35);
+}
+
+.score-panel .copy-btn:hover {
+  background: rgba(79, 134, 255, 0.22);
+}
+
 .score-card,
 .status-pill {
   padding: 14px 20px;
