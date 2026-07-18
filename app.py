@@ -5,6 +5,7 @@ from fastapi.templating import Jinja2Templates
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
+STATIC_VERSION = "2"
 
 mods = {
     "positive": [
@@ -229,7 +230,7 @@ def home(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="index.html",
-        context={"mods": mods},
+        context={"mods": mods, "static_version": STATIC_VERSION},
     )
 
 @app.get("/health")
